@@ -1156,8 +1156,7 @@ def main():
         st.markdown("### About This Report")
         
         st.info("""
-        **Generated**: March 2026  
-        **Audience**: ML Professors, NLP Researchers, AI Engineers  
+        **Generated**: March 2026   
         **Platform**: Streamlit + Plotly  
         **Source Code**: Available on GitHub  
         
