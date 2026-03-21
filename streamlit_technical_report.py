@@ -66,25 +66,28 @@ st.markdown("""
     }
     
     .stTabs [data-baseweb="tab-list"] {
-        gap: 4px;
+        gap: 8px;
         background: transparent;
-        border-bottom: 2px solid rgba(226, 232, 240, 0.5);
+        border-bottom: 2px solid rgba(226, 232, 240, 0.7);
+        padding: 0 4px;
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.55);
         border-radius: 12px 12px 0 0;
-        border: 1px solid rgba(226, 232, 240, 0.3);
-        color: #64748B;
-        font-weight: 500;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        color: #475569;
+        font-weight: 700;
+        padding: 12px 18px;
+        min-height: 52px;
         transition: all 0.3s ease;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
-        color: white;
-        border: 1px solid transparent;
-        box-shadow: 0 8px 24px 0 rgba(37, 99, 235, 0.25);
+        background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+        color: #0F172A;
+        border: 1px solid rgba(14, 165, 233, 0.45);
+        box-shadow: 0 8px 20px 0 rgba(14, 165, 233, 0.28);
     }
     
     h1 {
@@ -102,7 +105,7 @@ st.markdown("""
     h2 {
         color: #0F172A;
         font-size: 2.2em;
-        font-weight: 700;
+        font-weight: 800;
         margin: 1.5em 0 0.5em 0;
         border-bottom: 3px solid;
         border-image: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%) 1;
@@ -113,14 +116,14 @@ st.markdown("""
     h3 {
         color: #1E293B;
         font-size: 1.6em;
-        font-weight: 700;
+        font-weight: 800;
         margin: 1.2em 0 0.4em 0;
         letter-spacing: -0.3px;
     }
     
     h4, h5, h6 {
         color: #334155;
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: -0.2px;
     }
     
@@ -379,31 +382,51 @@ def create_performance_chart():
     methods = ['CivicPulse\n(RAG + LLM)', 'GPT-4 Only\n(No RAG)', 'Traditional\nLegal Consult']
     accuracy = [87.5, 72, 95]
     latency = [2.3, 4.1, 1440]  # in minutes
-    
+    latency_labels = [f"{value:g}m" for value in latency]
+    latency_hover = [f"{method}: {value:g} minutes" for method, value in zip(methods, latency)]
+
     fig = go.Figure()
-    
+
     fig.add_trace(go.Bar(
         x=methods,
         y=accuracy,
         name='Accuracy (%)',
-        marker_color='#2563EB',
+        marker_color='rgba(59, 130, 246, 0.65)',
         yaxis='y'
     ))
-    
+
     fig.add_trace(go.Scatter(
         x=methods,
         y=latency,
-        name='Time (minutes)',
-        marker=dict(color='#7C3AED', size=12),
-        mode='lines+markers',
+        name='Response Time (min, log scale)',
+        marker=dict(color='#7C3AED', size=11),
+        mode='lines+markers+text',
+        text=latency_labels,
+        hovertext=latency_hover,
+        hovertemplate='%{hovertext}<extra></extra>',
+        textposition='top center',
         yaxis='y2'
     ))
-    
+
     fig.update_layout(
         title='CivicPulse Performance vs. Baselines',
         xaxis_title='',
-        yaxis=dict(title='Accuracy (%)', titlefont=dict(color='#2563EB'), tickfont=dict(color='#2563EB')),
-        yaxis2=dict(title='Response Time (min)', titlefont=dict(color='#7C3AED'), tickfont=dict(color='#7C3AED'), overlaying='y'),
+        yaxis=dict(
+            title='Accuracy (%)',
+            titlefont=dict(color='rgba(59, 130, 246, 0.85)'),
+            tickfont=dict(color='rgba(59, 130, 246, 0.85)'),
+            range=[0, 100]
+        ),
+        yaxis2=dict(
+            title='Response Time (minutes, log scale)',
+            titlefont=dict(color='#7C3AED'),
+            tickfont=dict(color='#7C3AED'),
+            type='log',
+            showgrid=True,
+            gridcolor='rgba(124, 58, 237, 0.15)',
+            overlaying='y',
+            side='right'
+        ),
         hovermode='x unified',
         paper_bgcolor="rgba(255, 255, 255, 0.6)",
         plot_bgcolor="rgba(255, 255, 255, 0.3)",
