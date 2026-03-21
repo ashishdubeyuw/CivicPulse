@@ -382,6 +382,8 @@ def create_performance_chart():
     methods = ['CivicPulse\n(RAG + LLM)', 'GPT-4 Only\n(No RAG)', 'Traditional\nLegal Consult']
     accuracy = [87.5, 72, 95]
     latency = [2.3, 4.1, 1440]  # in minutes
+    latency_labels = [f"{value:g}m" for value in latency]
+    latency_hover = [f"{method}: {value:g} minutes" for method, value in zip(methods, latency)]
 
     fig = go.Figure()
 
@@ -399,7 +401,9 @@ def create_performance_chart():
         name='Response Time (min, log scale)',
         marker=dict(color='#7C3AED', size=11),
         mode='lines+markers+text',
-        text=['2.3m', '4.1m', '24h'],
+        text=latency_labels,
+        hovertext=latency_hover,
+        hovertemplate='%{hovertext}<extra></extra>',
         textposition='top center',
         yaxis='y2'
     ))
@@ -418,6 +422,8 @@ def create_performance_chart():
             titlefont=dict(color='#7C3AED'),
             tickfont=dict(color='#7C3AED'),
             type='log',
+            showgrid=True,
+            gridcolor='rgba(124, 58, 237, 0.15)',
             overlaying='y',
             side='right'
         ),
