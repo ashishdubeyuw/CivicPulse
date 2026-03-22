@@ -1081,7 +1081,7 @@ def main():
             - 🌐 [Live Application](https://civic-pu1se.netlify.app) - Interactive system
             - 📦 [GitHub Repository](https://github.com/Meerxn/civic-pulse) - Full source code
             - 🎬 [Project Presentation](https://gamma.app/docs/AI-Powered-Government-Navigator-for-Seattle-Entrepreneurs-g6t6wa1tgnokjmz?mode=doc) - Slide deck
-            - 📄 [Technical Report PDF](./CivicPulse_Technical_Report.pdf) - Detailed documentation
+            - 📄 [Technical Report PDF](CivicPulse_Technical_Report.pdf) - Detailed documentation
             """)
         
         with col2:
