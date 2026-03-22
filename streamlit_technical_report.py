@@ -1080,6 +1080,7 @@ def main():
             st.markdown("""
             - 🌐 [Live Application](https://civic-pu1se.netlify.app) - Interactive system
             - 📦 [GitHub Repository](https://github.com/Meerxn/civic-pulse) - Full source code
+            - 📦 [GitHub Repository](https://github.com/ashishdubeyuw/CivicPulse) - Technical Report Repository
             - 🎬 [Project Presentation](https://gamma.app/docs/AI-Powered-Government-Navigator-for-Seattle-Entrepreneurs-g6t6wa1tgnokjmz?mode=doc) - Slide deck
             - 📄 [Technical Report PDF](https://raw.githubusercontent.com/ashishdubeyuw/CivicPulse/main/CivicPulse_Technical_Report.pdf) - Detailed documentation
             """)
